@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="users.css">
+</head>
+<body>
+<h1>User Management</h1>
+
+<header>
+    <nav>
+        <div class="header-button-container">
+            <a class="button" href="/fleet">Fleet</a>
+            <a class="button" href="/lejekontrakter">Lejekontrakter</a>
+            <a class="button" href="/skaderapporter">Skaderapporter</a>
+            <a class="button" href="/users">User Management</a>
+        </div>
+    </nav>
+</header>
+
+<!-- User Table -->
+<h2>Brugere</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Navn</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>Stilling</th>
+        <th>Opdater Bruger</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.user_id}"></td>
+        <td th:text="${user.user_navn}"></td>
+        <td th:text="${user.user_email}"></td>
+        <td th:text="${user.user_telefonnummer}"></td>
+        <td th:text="${user.user_rolle}"></td>
+        <td>
+            <!-- Edit User Form -->
+            <form action="/users/edit" method="post" style="display:inline;">
+                <input type="hidden" name="user_id" th:value="${user.user_id}"/>
+                <input type="text" name="user_navn" th:value="${user.user_navn}" required />
+                <input type="email" name="user_email" th:value="${user.user_email}" required />
+                <input type="password" name="user_password" th:value="${user.user_password}" required />
+                <input type="tel" name="user_telefonnummer" th:value="${user.user_telefonnummer}" required />
+                <input type="text" name="user_rolle" th:value="${user.user_rolle}" required />
+                <button type="submit" class="opdater-bruger-knap">Opdater bruger</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<!-- Create New User Form -->
+<h2>Opret bruger</h2>
+<form action="/users/create" method="post">
+    <input type="text" name="user_navn" placeholder="Navn" required>
+    <input type="email" name="user_email" placeholder="E-mail" required>
+    <input type="password" name="user_password" placeholder="Password" required>
+    <input type="tel" name="user_telefonnummer" placeholder="Telefon nr." required>
+
+    <label for="user_rolle"></label>
+    <select name="user_rolle" id="user_rolle" required>
+        <option value="" disabled selected>Vælg stilling</option>
+        <option value="Admin">Admin</option>
+        <option value="Dataregistrering">Dataregistrering</option>
+        <option value="Skade og udbedring">Skade og udbedring</option>
+        <option value="Forretningsudvikler">Forretningsudvikler</option>
+    </select>
+
+    <button type="submit" class="opret-bruger-knap">Opret bruger</button>
+</form>
+
+<!-- Delete User Form -->
+<h2>Slet bruger</h2>
+<form action="/users/delete" method="post">
+    <label for="user_id">Vælg den bruger som du vil slette:</label>
+    <select name="selectedUserId" id="user_id" required>
+        <option value="" disabled selected>Vælg bruger</option>
+        <option th:each="user : ${users}" th:value="${user.user_id}" th:text="${user.user_navn}"></option>
+    </select>
+    <button type="submit" class="slet-bruger-knap">Slet bruger</button>
+</form>
+</body>
+</html>
