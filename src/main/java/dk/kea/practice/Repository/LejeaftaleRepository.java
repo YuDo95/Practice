@@ -20,12 +20,19 @@ public class LejeaftaleRepository {
 
     // Method to create a new lejeaftale
     public void createLejeaftale(Lejeaftale lejeaftale) {
-        String sql = "INSERT INTO lejeaftale (lejeaftale_id, lejeaftale_bil_vognnummer, lejeaftale_startdato, lejeaftale_slutdato, lejeaftale_pris, lejeaftale_aftalt_km, lejeaftale_slut_km, lejeaftale_overkoerte_km, lejeaftale_created_at, lejeaftale_updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, lejeaftale.getId(), lejeaftale.getBilVognnummer(),
-                lejeaftale.getStartdato(), lejeaftale.getSlutdato(), lejeaftale.getPris(),
-                lejeaftale.getAftaltKm(), lejeaftale.getSlutKm(), lejeaftale.isOverkoerteKm(),
-                lejeaftale.getCreatedAt(), lejeaftale.getUpdatedAt());
+
+        String sql = "INSERT INTO lejeaftale (lejeaftale_bil_vognnummer, lejeaftale_user_id, lejeaftale_startdato, lejeaftale_slutdato, lejeaftale_pris, lejeaftale_aftalt_km, lejeaftale_created_at, lejeaftale_updated_at) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
+
+        jdbcTemplate.update(sql,
+                lejeaftale.getBilVognnummer(),
+                lejeaftale.getUserId(),
+                lejeaftale.getStartdato(),
+                lejeaftale.getSlutdato(),
+                lejeaftale.getPris(),
+                lejeaftale.getAftaltKm());
+
     }
+
 
     // Method to retrieve a lejeaftale by ID
     public Lejeaftale getLejeaftaleById(int id) {
@@ -39,25 +46,26 @@ public class LejeaftaleRepository {
         return jdbcTemplate.query(sql, this::mapRowToLejeaftale);
     }
 
-    // Method to update a lejeaftale
-    public int updateLejeaftale(Lejeaftale lejeaftale) {
-        String sql = "UPDATE lejeaftale SET lejeaftale_bil_vognnummer = ?, lejeaftale_startdato = ?, lejeaftale_slutdato = ?, lejeaftale_pris = ?, lejeaftale_aftalt_km = ?, lejeaftale_slut_km = ?, lejeaftale_overkoerte_km = ?, lejeaftale_updated_at = ? WHERE lejeaftale_id = ?";
-        return jdbcTemplate.update(sql, lejeaftale.getBilVognnummer(), lejeaftale.getStartdato(),
-                lejeaftale.getSlutdato(), lejeaftale.getPris(), lejeaftale.getAftaltKm(),
-                lejeaftale.getSlutKm(), lejeaftale.isOverkoerteKm(), lejeaftale.getUpdatedAt(),
-                lejeaftale.getId());
+    public void updateLejeaftale(int lejeaftaleId, String startdato, String slutdato, double pris, int aftaltKm, Integer slutKm, boolean overkoerteKm) {
+        String sql = "UPDATE lejeaftale SET " +
+                "lejeaftale_startdato = ?, " +
+                "lejeaftale_slutdato = ?, lejeaftale_pris = ?, lejeaftale_aftalt_km = ?, " +
+                "lejeaftale_slut_km = ?, lejeaftale_overkoerte_km = ?, lejeaftale_updated_at = CURRENT_TIMESTAMP " +
+                "WHERE lejeaftale_id = ?";
+
+        jdbcTemplate.update(sql, startdato, slutdato, pris, aftaltKm, slutKm, overkoerteKm, lejeaftaleId);
     }
 
     // Method to delete a lejeaftale
-    public int deleteLejeaftale(int id) {
+    public void deleteLejeaftale(int id) {
         String sql = "DELETE FROM lejeaftale WHERE lejeaftale_id = ?";
-        return jdbcTemplate.update(sql, id);
+        jdbcTemplate.update(sql, id);
     }
 
     // Helper method to map rows of the result set to Lejeaftale objects
     private Lejeaftale mapRowToLejeaftale(ResultSet rs, int rowNum) throws SQLException {
         Lejeaftale lejeaftale = new Lejeaftale();
-        lejeaftale.setId(rs.getInt("lejeaftale_id"));
+        lejeaftale.setLejeaftaleId(rs.getInt("lejeaftale_id"));
         lejeaftale.setBilVognnummer(rs.getInt("lejeaftale_bil_vognnummer"));
         lejeaftale.setStartdato(rs.getString("lejeaftale_startdato"));
         lejeaftale.setSlutdato(rs.getString("lejeaftale_slutdato"));

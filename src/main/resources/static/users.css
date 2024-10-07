@@ -43,7 +43,6 @@ th {
     color: white; /* White text */
 }
 
-
 tr:nth-child(even) {
     background-color: #f2f2f2; /* Light grey for even rows */
 }
@@ -63,8 +62,10 @@ form {
     background-color: #ffffff; /* White background for form */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Box shadow */
 }
-
+/* Input styles */
 input[type="text"],
+input[type="number"],
+input[type="date"],
 input[type="email"],
 input[type="password"],
 input[type="tel"],
@@ -75,17 +76,22 @@ select {
     border: 1px solid #ced4da; /* Border around inputs */
     border-radius: 5px; /* Rounded corners */
     font-size: 16px; /* Font size for inputs */
-    transition: border-color 0.3s ease; /* Smooth transition */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for input fields */
 }
 
+/* Focus styles */
 input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="tel"]:focus,
 select:focus {
     border-color: #007bff; /* Change border color on focus */
     outline: none; /* Remove outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add focus shadow */
 }
+
 
 /* Button styles */
 .opdater-bruger-knap {
@@ -103,7 +109,6 @@ select:focus {
     background-color: #0056b3; /* Darker blue on hover */
 }
 
-/* Create User button styles */
 .opret-bruger-knap {
     background-color: #28a745; /* Green button */
     color: white; /* White text */
@@ -119,7 +124,6 @@ select:focus {
     background-color: #218838; /* Darker green on hover */
 }
 
-/* Delete User button styles */
 .slet-bruger-knap {
     background-color: #dc3545; /* Red button */
     color: white; /* White text */
@@ -150,7 +154,8 @@ select:focus {
     }
 }
 
-.header-button-container {
+.header-button-container,
+.footer-button-container{
     display: flex; /* Arrange header buttons in a row */
     justify-content: center; /* Center the buttons */
     gap: 15px; /* Space between header buttons */
@@ -173,3 +178,6 @@ select:focus {
     background-color: #0056b3; /* Darker shade on hover */
     transform: scale(1.05); /* Slightly enlarge on hover */
 }
+
+footer {
+    text-align: center; }/* Center footer text */

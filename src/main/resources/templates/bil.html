@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bil Management</title>
+    <link rel="stylesheet" href="bil.css">
+</head>
+<body>
+<h1>Fleet</h1>
+
+<header>
+    <nav>
+        <div class="header-button-container">
+            <a class="header-button" href="/bil">Fleet</a>
+            <a class="header-button" href="/lejeaftaler">Lejeaftaler</a>
+            <a class="header-button" href="/skaderapporter">Skaderapporter</a>
+            <a class="header-button" href="/users">User Management</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Car Table -->
+<h2>Bil Oversigt</h2>
+<table>
+    <tr>
+        <th>Vognnummer</th>
+        <th>Stelnummer</th>
+        <th>Model</th>
+        <th>Mærke</th>
+        <th>Årgang</th>
+        <th>Farve</th>
+        <th>Registreringsdato</th>
+        <th>Opdater Bil</th>
+    </tr>
+    <tr th:each="bil : ${biler}">
+        <td th:text="${bil.vognnummer}"></td>
+        <td th:text="${bil.stelnummer}"></td>
+        <td th:text="${bil.model}"></td>
+        <td th:text="${bil.maerke}"></td>
+        <td th:text="${bil.aargang}"></td>
+        <td th:text="${bil.farve}"></td>
+        <td th:text="${bil.registreringsdato}"></td>
+        <td>
+            <!-- Edit Car Form -->
+            <form th:action="@{/bil/update/{vognnummer}(vognnummer=${bil.vognnummer})}" method="post">
+                <input type="hidden" name="vognnummer" th:value="${bil.vognnummer}"/>
+                <input type="text" name="model" th:value="${bil.model}" required />
+                <input type="text" name="maerke" th:value="${bil.maerke}" required />
+                <input type="number" name="aargang" th:value="${bil.aargang}" required />
+                <input type="text" name="farve" th:value="${bil.farve}" required />
+                <input type="date" name="registreringsdato" th:value="${bil.registreringsdato}" required />
+                <input type="text" name="stelnummer" th:value="${bil.stelnummer}" required />
+                <input type="text" name="udleveringslokation" th:value="${bil.udleveringslokation}" required />
+                <input type="number" name="staalpris" th:value="${bil.staalpris}" required />
+                <input type="number" name="regAfgift" th:value="${bil.regAfgift}" required />
+                <input type="number" name="co2Udledning" th:value="${bil.co2Udledning}" required />
+                <input type="number" name="km" th:value="${bil.km}" required />
+                <button type="submit" class="opdater-bil-knap">Opdater bil</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<!-- Create New Car Form -->
+<h2>Opret Bil</h2>
+<form action="/bil/create" method="post">
+    <input type="text" name="model" placeholder="Model" required>
+    <input type="text" name="maerke" placeholder="Mærke" required>
+    <input type="number" name="aargang" placeholder="Årgang" required>
+    <input type="text" name="farve" placeholder="Farve" required>
+    <input type="date" name="registreringsdato" required>
+    <input type="text" name="stelnummer" placeholder="Stelnummer" required>
+    <input type="text" name="udleveringslokation" placeholder="Udleveringslokation" required>
+    <input type="number" name="staalpris" placeholder="Stålpris" required>
+    <input type="number" name="regAfgift" placeholder="Registreringsafgift" required>
+    <input type="number" name="co2Udledning" placeholder="CO2 Udledning" required>
+    <input type="number" name="km" placeholder="Kilometer" required>
+    <button type="submit" class="opret-bil-knap">Opret Bil</button>
+</form>
+
+<!-- Delete Car Form -->
+<h2>Slet Bil</h2>
+<form action="/bil/delete" method="post">
+    <label for="vognnummer">Vælg den bil som du vil slette:</label>
+    <select name="vognnummer" id="vognnummer" required>
+        <option value="" disabled selected>Vælg bil</option>
+        <option th:each="bil : ${biler}" th:value="${bil.vognnummer}" th:text="${bil.model}"></option>
+    </select>
+    <button type="submit" class="slet-bil-knap">Slet Bil</button>
+</form>
+
+
+<footer>
+    <nav>
+        <div class="footer-button-container">
+            <a class="button" href="/bil">Fleet</a>
+            <a class="button" href="/lejeaftaler">Lejeaftaler</a>
+            <a class="button" href="/skaderapporter">Skaderapporter</a>
+            <a class="button" href="/users">User Management</a>
+        </div>
+    </nav>
+</footer>
+</body>
+</html>
