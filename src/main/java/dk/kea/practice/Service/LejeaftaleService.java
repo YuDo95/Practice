@@ -31,13 +31,15 @@ public class LejeaftaleService {
         return lejeaftaleRepository.getAllLejeaftaler();
     }
 
-    // Method to update a lejeaftale
-    public int updateLejeaftale(Lejeaftale lejeaftale) {
-        return lejeaftaleRepository.updateLejeaftale(lejeaftale);
+
+
+    public void updateLejeaftale(int lejeaftaleId, String startdato, String slutdato, double pris, int aftaltKm, Integer slutKm, boolean overkoerteKm) {
+        lejeaftaleRepository.updateLejeaftale(lejeaftaleId, startdato, slutdato, pris, aftaltKm, slutKm, overkoerteKm);
     }
 
+
     // Method to delete a lejeaftale
-    public int deleteLejeaftale(int lejeaftaleId) {
-        return lejeaftaleRepository.deleteLejeaftale(lejeaftaleId);
+    public void deleteLejeaftale(int lejeaftaleId) {
+        lejeaftaleRepository.deleteLejeaftale(lejeaftaleId);
     }
 }

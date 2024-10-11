@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lejeaftale Management</title>
+    <link rel="stylesheet" href="lejeaftaler.css">
+</head>
+<body>
+<h1>Lejeaftaler</h1>
+<header>
+    <nav>
+        <div class="header-button-container">
+            <a class="header-button" href="/bil">Fleet</a>
+            <a class="header-button" href="/lejeaftaler">Lejeaftaler</a>
+            <a class="header-button" href="/skaderapporter">Skaderapporter</a>
+            <a class="header-button" href="/users">User Management</a>
+        </div>
+    </nav>
+</header>
+
+
+<!-- Lejeaftaler Table -->
+<h2>Lejeaftale Oversigt</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Bil Vognnummer</th>
+        <th>User ID</th>
+        <th>Startdato</th>
+        <th>Slutdato</th>
+        <th>Pris (DKK)</th>
+        <th>Aftalt KM</th>
+        <th>Opdater Lejeaftale</th>
+        <th>Slet Lejeaftale</th>
+    </tr>
+    <tr th:each="lejeaftale : ${lejeaftaler}">
+        <td th:text="${lejeaftale.lejeaftaleId}"></td>
+        <td th:text="${lejeaftale.bilVognnummer}"></td>
+        <td th:text="${lejeaftale.userId}"></td>
+        <td th:text="${lejeaftale.startdato}"></td>
+        <td th:text="${lejeaftale.slutdato}"></td>
+        <td th:text="${lejeaftale.pris}"></td>
+        <td th:text="${lejeaftale.aftaltKm}"></td>
+        <td>
+            <!-- Update Lejeaftale Form -->
+            <form th:action="@{/lejeaftaler/update/{id}(id=${lejeaftale.lejeaftaleId})}" method="post">
+                <input type="hidden" name="id" th:value="${lejeaftale.lejeaftaleId}">
+                <input type="date" name="startdato" th:value="${lejeaftale.startdato}" required>
+                <input type="date" name="slutdato" th:value="${lejeaftale.slutdato}" required>
+                <input type="number" name="pris" th:value="${lejeaftale.pris}" required step="0.01">
+                <input type="number" name="aftaltKm" th:value="${lejeaftale.aftaltKm}" required>
+                <input type="number" name="slutKm" th:value="${lejeaftale.slutKm}" placeholder="Slut KM"> <!-- Optional -->
+
+                <!-- Overkoerte KM checkbox -->
+                <label for="overkoerteKm">Overkørte KM?</label>
+                <input type="hidden" name="overkoerteKm" value="false"> <!-- Hidden field to ensure false is submitted -->
+                <input type="checkbox" id="overkoerteKm" name="overkoerteKm" value="true" th:checked="${lejeaftale.overkoerteKm}">
+
+
+                <button type="submit" class="opdater-lejeaftale-knap">Opdater</button>
+            </form>
+
+        </td>
+        <td>
+            <!-- Delete Lejeaftale Form -->
+            <form class="slet-legeaftale-padding" th:action="@{/lejeaftaler/delete}" method="post">
+                <input type="hidden" name="id" th:value="${lejeaftale.lejeaftaleId}">
+                <button type="submit" class="slet-lejeaftale-knap">Slet</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+<h2>Opret Lejeaftale</h2>
+<form th:action="@{/lejeaftaler/create}" method="post">
+    <select name="vognnummer" id="vognnummer" required>
+        <option value="" disabled selected>Vælg bil</option>
+        <option th:each="bil : ${biler}" th:value="${bil.vognnummer}" th:text="${bil.model}"></option>
+    </select>
+    <p></p>
+    <select name="userId" required>
+        <option value="" disabled selected>Vælg bruger</option>
+        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.navn}"></option>
+    </select>
+
+    <input type="date" name="startdato" placeholder="Startdato" required>
+    <input type="date" name="slutdato" placeholder="Slutdato" required>
+    <input type="number" name="pris" placeholder="Lejeaftale Pris (DKK)" required step="0.01" min="0">
+    <input type="number" name="aftaltKm" placeholder="Aftalt KM" required min="0">
+    <button type="submit" class="opret-lejeaftale-knap">Opret Lejeaftale</button>
+</form>
+
+
+<!-- Optional error message for unsuccessful operations -->
+<section th:if="${error}">
+    <p style="color: red;" th:text="${error}"></p>
+</section>
+
+<footer>
+    <nav>
+        <div class="footer-button-container">
+            <a class="footer-button" href="/bil">Fleet</a>
+            <a class="footer-button" href="/lejeaftaler">Lejeaftaler</a>
+            <a class="footer-button" href="/skaderapporter">Skaderapporter</a>
+            <a class="footer-button" href="/users">User Management</a>
+        </div>
+    </nav>
+</footer>
+
+</body>
+</html>

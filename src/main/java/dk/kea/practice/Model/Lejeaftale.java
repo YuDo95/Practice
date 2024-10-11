@@ -1,44 +1,42 @@
 package dk.kea.practice.Model;
 
 public class Lejeaftale {
+    private int lejeaftaleId;         // Primary key
+    private int bilVognnummer;         // Foreign key reference to Bil
+    private int userId;                // Foreign key reference to User
+    private String startdato;          // Start date of the rental in String format (e.g., "YYYY-MM-DD")
+    private String slutdato;           // End date of the rental in String format (e.g., "YYYY-MM-DD")
+    private double pris;               // Rental price
+    private int aftaltKm;              // Agreed kilometers
+    private Integer slutKm;            // Ending kilometers
+    private boolean overkoerteKm;      // Flag for exceeded kilometers
+    private String createdAt;           // Record creation timestamp in String format
+    private String updatedAt;           // Record update timestamp in String format
 
-    private int id;
-    private int bilVognnummer;
-    private int userId;
-    private String startdato;
-    private String slutdato;
-    private double pris;
-    private int aftaltKm;
-    private int slutKm; // Can be null
-    private boolean overkoerteKm;
-    private String createdAt;
-    private String updatedAt;
-
-
+    // Default constructor
     public Lejeaftale() {
     }
 
-    public Lejeaftale(int aftaltKm, int bilVognnummer, String createdAt, int id, boolean overkoerteKm, double pris, String slutdato, Integer slutKm, String startdato, String updatedAt, int userId) {
-        this.aftaltKm = aftaltKm;
+    // Parameterized constructor for form inputs
+    public Lejeaftale(int bilVognnummer, int userId, String startdato, String slutdato, double pris,
+                      int aftaltKm) {
         this.bilVognnummer = bilVognnummer;
-        this.createdAt = createdAt;
-        this.id = id;
-        this.overkoerteKm = overkoerteKm;
-        this.pris = pris;
-        this.slutdato = slutdato;
-        this.slutKm = slutKm;
-        this.startdato = startdato;
-        this.updatedAt = updatedAt;
         this.userId = userId;
+        this.startdato = startdato;
+        this.slutdato = slutdato;
+        this.pris = pris;
+        this.aftaltKm = aftaltKm;
+        this.slutKm = null;           // Default to null for optional field
+        this.overkoerteKm = false;    // Default to false for boolean field
     }
 
-    // Getters and Setters
-    public int getId() {
-        return id;
+    // Getters and setters
+    public int getLejeaftaleId() {
+        return lejeaftaleId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLejeaftaleId(int lejeaftaleId) {
+        this.lejeaftaleId = lejeaftaleId;
     }
 
     public int getBilVognnummer() {
@@ -119,22 +117,5 @@ public class Lejeaftale {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Lejeaftale{" +
-                "aftaltKm=" + aftaltKm +
-                ", id=" + id +
-                ", bilVognnummer=" + bilVognnummer +
-                ", userId=" + userId +
-                ", startdato='" + startdato + '\'' +
-                ", slutdato='" + slutdato + '\'' +
-                ", pris=" + pris +
-                ", slutKm=" + slutKm +
-                ", overkoerteKm=" + overkoerteKm +
-                ", createdAt='" + createdAt + '\'' +
-                ", updatedAt='" + updatedAt + '\'' +
-                '}';
     }
 }

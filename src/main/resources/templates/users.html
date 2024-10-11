@@ -9,19 +9,16 @@
 <body>
 <h1>User Management</h1>
 
-<header>
-    <nav>
-        <div class="header-button-container">
-            <a class="button" href="/fleet">Fleet</a>
-            <a class="button" href="/lejekontrakter">Lejekontrakter</a>
-            <a class="button" href="/skaderapporter">Skaderapporter</a>
-            <a class="button" href="/users">User Management</a>
-        </div>
-    </nav>
-</header>
+<nav>
+    <div class="header-button-container">
+        <a class="header-button" href="/bil">Fleet</a>
+        <a class="header-button" href="/lejeaftaler">Lejeaftaler</a>
+        <a class="header-button" href="/skaderapporter">Skaderapporter</a>
+        <a class="header-button" href="/users">User Management</a>
+    </div>
+</nav>
 
-<!-- User Table -->
-<h2>Brugere</h2>
+<h2>Bruger Oversigt</h2>
 <table>
     <tr>
         <th>ID</th>
@@ -38,37 +35,38 @@
         <td th:text="${user.user_telefonnummer}"></td>
         <td th:text="${user.user_rolle}"></td>
         <td>
-            <!-- Edit User Form -->
-            <form action="/users/edit" method="post" style="display:inline;">
-                <input type="hidden" name="user_id" th:value="${user.user_id}"/>
+            <form th:action="@{/users/update}" method="post">
+                <input type="hidden" name="user_id" th:value="${user.user_id}" />
                 <input type="text" name="user_navn" th:value="${user.user_navn}" required />
                 <input type="email" name="user_email" th:value="${user.user_email}" required />
-                <input type="password" name="user_password" th:value="${user.user_password}" required />
+                <input type="password" name="user_password" th:value="${user.user_password}"required />
                 <input type="tel" name="user_telefonnummer" th:value="${user.user_telefonnummer}" required />
-                <input type="text" name="user_rolle" th:value="${user.user_rolle}" required />
+                <select name="user_rolle" required>
+                    <option value="" disabled selected>Vælg stilling</option>
+                    <option value="Admin" th:selected="${user.user_rolle == 'Admin'}">Admin</option>
+                    <option value="Dataregistrering" th:selected="${user.user_rolle == 'Dataregistrering'}">Dataregistrering</option>
+                    <option value="Skade og udbedring" th:selected="${user.user_rolle == 'Skade og udbedring'}">Skade og udbedring</option>
+                    <option value="Forretningsudvikler" th:selected="${user.user_rolle == 'Forretningsudvikler'}">Forretningsudvikler</option>
+                </select>
                 <button type="submit" class="opdater-bruger-knap">Opdater bruger</button>
             </form>
         </td>
     </tr>
 </table>
 
-<!-- Create New User Form -->
 <h2>Opret bruger</h2>
 <form action="/users/create" method="post">
     <input type="text" name="user_navn" placeholder="Navn" required>
     <input type="email" name="user_email" placeholder="E-mail" required>
     <input type="password" name="user_password" placeholder="Password" required>
-    <input type="tel" name="user_telefonnummer" placeholder="Telefon nr." required>
-
-    <label for="user_rolle"></label>
-    <select name="user_rolle" id="user_rolle" required>
+    <input type="tel" name="user_telefonnummer" placeholder="Telefonnummer" required>
+    <select name="user_rolle" required>
         <option value="" disabled selected>Vælg stilling</option>
         <option value="Admin">Admin</option>
         <option value="Dataregistrering">Dataregistrering</option>
         <option value="Skade og udbedring">Skade og udbedring</option>
         <option value="Forretningsudvikler">Forretningsudvikler</option>
     </select>
-
     <button type="submit" class="opret-bruger-knap">Opret bruger</button>
 </form>
 
@@ -82,5 +80,16 @@
     </select>
     <button type="submit" class="slet-bruger-knap">Slet bruger</button>
 </form>
+
+<footer>
+    <nav>
+        <div class="header-button-container">
+            <a class="button" href="/bil">Fleet</a>
+            <a class="button" href="/lejeaftaler">Lejeaftaler</a>
+            <a class="button" href="/skaderapporter">Skaderapporter</a>
+            <a class="button" href="/users">User Management</a>
+        </div>
+    </nav>
+</footer>
 </body>
 </html>
