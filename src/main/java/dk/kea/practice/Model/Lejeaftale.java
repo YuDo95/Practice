@@ -1,24 +1,26 @@
 package dk.kea.practice.Model;
 
+import java.time.LocalDate;
+
 public class Lejeaftale {
     private int lejeaftaleId;         // Primary key
     private int bilVognnummer;         // Foreign key reference to Bil
     private int userId;                // Foreign key reference to User
-    private String startdato;          // Start date of the rental in String format (e.g., "YYYY-MM-DD")
-    private String slutdato;           // End date of the rental in String format (e.g., "YYYY-MM-DD")
+    private LocalDate startdato;          // Start date of the rental in String format (e.g., "YYYY-MM-DD")
+    private LocalDate slutdato;           // End date of the rental in String format (e.g., "YYYY-MM-DD")
     private double pris;               // Rental price
     private int aftaltKm;              // Agreed kilometers
     private Integer slutKm;            // Ending kilometers
     private boolean overkoerteKm;      // Flag for exceeded kilometers
-    private String createdAt;           // Record creation timestamp in String format
-    private String updatedAt;           // Record update timestamp in String format
+    private LocalDate createdAt;           // Record creation timestamp in String format
+    private LocalDate updatedAt;           // Record update timestamp in String format
 
     // Default constructor
     public Lejeaftale() {
     }
 
     // Parameterized constructor for form inputs
-    public Lejeaftale(int bilVognnummer, int userId, String startdato, String slutdato, double pris,
+    public Lejeaftale(int bilVognnummer, int userId, LocalDate startdato, LocalDate slutdato, double pris,
                       int aftaltKm) {
         this.bilVognnummer = bilVognnummer;
         this.userId = userId;
@@ -55,19 +57,19 @@ public class Lejeaftale {
         this.userId = userId;
     }
 
-    public String getStartdato() {
+    public LocalDate getStartdato() {
         return startdato;
     }
 
-    public void setStartdato(String startdato) {
+    public void setStartdato(LocalDate startdato) {
         this.startdato = startdato;
     }
 
-    public String getSlutdato() {
+    public LocalDate getSlutdato() {
         return slutdato;
     }
 
-    public void setSlutdato(String slutdato) {
+    public void setSlutdato(LocalDate slutdato) {
         this.slutdato = slutdato;
     }
 
@@ -103,19 +105,19 @@ public class Lejeaftale {
         this.overkoerteKm = overkoerteKm;
     }
 
-    public String getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public LocalDate getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
