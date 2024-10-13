@@ -78,10 +78,12 @@
         <option value="" disabled selected>Vælg bil</option>
         <option th:each="bil : ${biler}" th:value="${bil.vognnummer}" th:text="${bil.model}"></option>
     </select>
+
     <p></p>
-    <select name="userId" required>
+
+    <select name="users" required>
         <option value="" disabled selected>Vælg bruger</option>
-        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.navn}"></option>
+        <option th:each="user : ${users}" th:value="${user.user_id}" th:text="${user.user_navn}"></option>
     </select>
 
     <input type="date" name="startdato" placeholder="Startdato" required>

@@ -1,7 +1,6 @@
 package dk.kea.practice.Controller;
 
 import dk.kea.practice.Model.Bil;
-import dk.kea.practice.Model.User;
 import dk.kea.practice.Service.BilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,7 @@ import java.util.List;
 @RequestMapping("/bil")
 public class BilController {
 
-    private final BilService bilService;
+    public BilService bilService;
 
     @Autowired
     public BilController(BilService bilService) {
@@ -37,8 +36,11 @@ public class BilController {
     // Endpoint to get all Bils
     @GetMapping
     public String getAllBiler(Model model) {
+
         List<Bil> allBiler = bilService.getAllBiler(); // Fetch the list of Bils from the service
+
         model.addAttribute("biler", allBiler); // Add the list to the model with the name "biler"
+
         return "bil"; // Return the name of the Thymeleaf template to display the list
     }
 

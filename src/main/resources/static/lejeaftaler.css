@@ -180,7 +180,7 @@ footer {
     text-align: center;
 }
 
-select {
+form select {
     width: calc(100% - 20px); /* Full width with padding */
     padding: 10px; /* Padding for inputs */
     margin: 10px 0; /* Margin for spacing */
