@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class LejeaftaleService {
+
     public final LejeaftaleRepository lejeaftaleRepository;
 
     @Autowired
@@ -30,8 +31,6 @@ public class LejeaftaleService {
     public List<Lejeaftale> getAllLejeaftale() {
         return lejeaftaleRepository.getAllLejeaftaler();
     }
-
-
 
     public void updateLejeaftale(int lejeaftaleId, String startdato, String slutdato, double pris, int aftaltKm, Integer slutKm, boolean overkoerteKm) {
         lejeaftaleRepository.updateLejeaftale(lejeaftaleId, startdato, slutdato, pris, aftaltKm, slutKm, overkoerteKm);

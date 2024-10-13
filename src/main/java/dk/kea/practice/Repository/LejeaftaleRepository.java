@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -67,14 +68,16 @@ public class LejeaftaleRepository {
         Lejeaftale lejeaftale = new Lejeaftale();
         lejeaftale.setLejeaftaleId(rs.getInt("lejeaftale_id"));
         lejeaftale.setBilVognnummer(rs.getInt("lejeaftale_bil_vognnummer"));
-        lejeaftale.setStartdato(rs.getString("lejeaftale_startdato"));
-        lejeaftale.setSlutdato(rs.getString("lejeaftale_slutdato"));
+        lejeaftale.setStartdato(rs.getObject("lejeaftale_startdato", LocalDate.class));
+        lejeaftale.setSlutdato(rs.getObject("lejeaftale_slutdato", LocalDate.class));
         lejeaftale.setPris(rs.getDouble("lejeaftale_pris"));
         lejeaftale.setAftaltKm(rs.getInt("lejeaftale_aftalt_km"));
         lejeaftale.setSlutKm(rs.getObject("lejeaftale_slut_km", Integer.class)); // Handling possible null value
         lejeaftale.setOverkoerteKm(rs.getBoolean("lejeaftale_overkoerte_km"));
-        lejeaftale.setCreatedAt(rs.getString("lejeaftale_created_at"));
-        lejeaftale.setUpdatedAt(rs.getString("lejeaftale_updated_at"));
+        lejeaftale.setCreatedAt(rs.getObject("lejeaftale_created_at", LocalDate.class));
+        lejeaftale.setUpdatedAt(rs.getObject("lejeaftale_updated_at", LocalDate.class));
+
         return lejeaftale;
     }
+
 }

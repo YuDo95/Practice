@@ -7,10 +7,12 @@ import dk.kea.practice.Service.UserService;
 import dk.kea.practice.Model.Lejeaftale;
 import dk.kea.practice.Service.LejeaftaleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -45,9 +47,31 @@ public class LejeaftaleController {
 
     // Endpoint to create a new lejeaftale
     @PostMapping("/create")
-    public String createLejeaftale(@ModelAttribute Lejeaftale lejeaftale) {
+    public String createLejeaftale(
+            @RequestParam("vognnummer") int vognnummer,
+            @RequestParam("users") int userId,
+            @RequestParam("startdato") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startdato,
+            @RequestParam("slutdato") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate slutdato,
+            @RequestParam("pris") double pris,  // Changed to double
+            @RequestParam("aftaltKm") int aftaltKm) {
+
+        // Create and save the Lejeaftale entity
+        Lejeaftale lejeaftale = new Lejeaftale();
+        lejeaftale.setBilVognnummer(vognnummer);
+        lejeaftale.setUserId(userId);
+        lejeaftale.setStartdato(startdato);
+        lejeaftale.setSlutdato(slutdato);
+        lejeaftale.setPris(pris);  // Using double
+        lejeaftale.setAftaltKm(aftaltKm);
+
+        // Optionally, set defaults or handle other fields
+        lejeaftale.setSlutKm(null);   // Initially, this can be null
+        lejeaftale.setOverkoerteKm(false);  // Defaulting to false
+
+        // Save lejeaftale in database
         lejeaftaleService.createLejeaftale(lejeaftale);
-        return "redirect:/lejeaftaler"; // Redirect to a page (e.g., a list of lejeaftaler)
+
+        return "redirect:/lejeaftaler";  // Redirect back to list page
     }
 
     @PostMapping("/delete")
