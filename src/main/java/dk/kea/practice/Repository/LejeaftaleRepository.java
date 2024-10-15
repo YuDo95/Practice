@@ -15,13 +15,14 @@ public class LejeaftaleRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public LejeaftaleRepository(JdbcTemplate jdbcTemplate) {
+    public LejeaftaleRepository(JdbcTemplate jdbcTemplate)
+    {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    // Method to create a new lejeaftale
-    public void createLejeaftale(Lejeaftale lejeaftale) {
 
+    public void createLejeaftale(Lejeaftale lejeaftale)
+    {
         String sql = "INSERT INTO lejeaftale (lejeaftale_bil_vognnummer, lejeaftale_user_id, lejeaftale_startdato, lejeaftale_slutdato, lejeaftale_pris, lejeaftale_aftalt_km, lejeaftale_created_at, lejeaftale_updated_at) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
 
         jdbcTemplate.update(sql,
@@ -31,23 +32,27 @@ public class LejeaftaleRepository {
                 lejeaftale.getSlutdato(),
                 lejeaftale.getPris(),
                 lejeaftale.getAftaltKm());
-
     }
 
 
-    // Method to retrieve a lejeaftale by ID
-    public Lejeaftale getLejeaftaleById(int id) {
+    public Lejeaftale getLejeaftaleById(int id)
+    {
         String sql = "SELECT * FROM lejeaftale WHERE lejeaftale_id = ?";
+
         return jdbcTemplate.queryForObject(sql, new Object[]{id}, this::mapRowToLejeaftale);
     }
 
-    // Method to retrieve all lejeaftaler
-    public List<Lejeaftale> getAllLejeaftaler() {
+
+    public List<Lejeaftale> getAllLejeaftaler()
+    {
         String sql = "SELECT * FROM lejeaftale";
+
         return jdbcTemplate.query(sql, this::mapRowToLejeaftale);
     }
 
-    public void updateLejeaftale(int lejeaftaleId, String startdato, String slutdato, double pris, int aftaltKm, Integer slutKm, boolean overkoerteKm) {
+
+    public void updateLejeaftale(int lejeaftaleId, String startdato, String slutdato, double pris, int aftaltKm, Integer slutKm, boolean overkoerteKm)
+    {
         String sql = "UPDATE lejeaftale SET " +
                 "lejeaftale_startdato = ?, " +
                 "lejeaftale_slutdato = ?, lejeaftale_pris = ?, lejeaftale_aftalt_km = ?, " +
