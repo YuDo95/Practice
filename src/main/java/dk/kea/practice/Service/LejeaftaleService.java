@@ -13,32 +13,29 @@ public class LejeaftaleService {
     public final LejeaftaleRepository lejeaftaleRepository;
 
     @Autowired
-    public LejeaftaleService(LejeaftaleRepository lejeaftaleRepository) {
+    public LejeaftaleService(LejeaftaleRepository lejeaftaleRepository)
+    {
         this.lejeaftaleRepository = lejeaftaleRepository;
     }
 
-    // Method to create a new lejeaftale
-    public void createLejeaftale(Lejeaftale lejeaftale) {
-        lejeaftaleRepository.createLejeaftale(lejeaftale);
-    }
 
-    // Method to get a lejeaftale by ID
-    public Lejeaftale getLejeaftaleById(int lejeaftaleId) {
-        return lejeaftaleRepository.getLejeaftaleById(lejeaftaleId);
-    }
+    public void createLejeaftale(Lejeaftale lejeaftale) {lejeaftaleRepository.createLejeaftale(lejeaftale);}
 
-    // Method to get all lejeaftale
+
     public List<Lejeaftale> getAllLejeaftale() {
         return lejeaftaleRepository.getAllLejeaftaler();
     }
 
-    public void updateLejeaftale(int lejeaftaleId, String startdato, String slutdato, double pris, int aftaltKm, Integer slutKm, boolean overkoerteKm) {
-        lejeaftaleRepository.updateLejeaftale(lejeaftaleId, startdato, slutdato, pris, aftaltKm, slutKm, overkoerteKm);
-    }
+
+    public void updateLejeaftale(int lejeaftaleId, String startdato, String slutdato, double pris, int aftaltKm, Integer slutKm, boolean overkoerteKm) {lejeaftaleRepository.updateLejeaftale(lejeaftaleId, startdato, slutdato, pris, aftaltKm, slutKm, overkoerteKm);}
 
 
-    // Method to delete a lejeaftale
-    public void deleteLejeaftale(int lejeaftaleId) {
-        lejeaftaleRepository.deleteLejeaftale(lejeaftaleId);
-    }
+    public void deleteLejeaftale(int lejeaftaleId) {lejeaftaleRepository.deleteLejeaftale(lejeaftaleId);}
+
+
+    /* Bliver ikke brugt (endnu)
+    public Lejeaftale getLejeaftaleById(int lejeaftaleId) {
+        return lejeaftaleRepository.getLejeaftaleById(lejeaftaleId);
+    }*/
+
 }

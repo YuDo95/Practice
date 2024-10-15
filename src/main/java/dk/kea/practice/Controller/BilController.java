@@ -16,57 +16,54 @@ public class BilController {
     public BilService bilService;
 
     @Autowired
-    public BilController(BilService bilService) {
+    public BilController(BilService bilService)
+    {
         this.bilService = bilService;
     }
 
-    // Endpoint to create a new Bil
-    @PostMapping("/create")
-    public String createBil(@ModelAttribute Bil bil) {
-        bilService.saveBil(bil);
-        return "redirect:/bil"; // Redirect to the fleet page after creation
-    }
 
-    // Endpoint to get a Bil by ID
-    @GetMapping("/{vognnummer}")
-    public Bil getBilById(@PathVariable("vognnummer") int vognnummer) {
-        return bilService.getBilById(vognnummer);
-    }
-
-    // Endpoint to get all Bils
     @GetMapping
-    public String getAllBiler(Model model) {
+    public String getAllBiler(Model model)
+    {
+        List<Bil> biler = bilService.getAllBiler();
+        model.addAttribute("biler", biler);
 
-        List<Bil> allBiler = bilService.getAllBiler(); // Fetch the list of Bils from the service
-
-        model.addAttribute("biler", allBiler); // Add the list to the model with the name "biler"
-
-        return "bil"; // Return the name of the Thymeleaf template to display the list
+        return "bil";
     }
 
 
-    // Endpoint to update a Bil
+    @PostMapping("/create")
+    public String createBil(@ModelAttribute Bil bil)
+    {
+        bilService.createBil(bil);
+
+        return "redirect:/bil";
+    }
+
+
     @PostMapping("/update/{vognnummer}")
-    public String updateBil(@PathVariable("vognnummer") int vognnummer, @ModelAttribute Bil bil) {
-        bil.setVognnummer(vognnummer);  // Ensure the correct ID is updated
+    public String updateBil(@ModelAttribute Bil bil)
+    {
         bilService.updateBil(bil);
-        return "redirect:/bil"; // Redirect to the fleet page after updating
+
+        return "redirect:/bil";
     }
 
 
-    // Endpoint to edit a Bil (Get the edit form)
-    @GetMapping("/edit/{vognnummer}")
-    public String editBil(@PathVariable("vognnummer") int vognnummer, Model model) {
-        Bil bil = bilService.getBilById(vognnummer); // Fetch the car details
-        model.addAttribute("bil", bil); // Add the car to the model
-        return "bil"; // Return the view for editing
-    }
-
-
-    // Endpoint to delete a Bil
     @PostMapping("/delete")
-    public String deleteBil(@RequestParam("vognnummer") int vognnummer) {
+    public String deleteBil(@RequestParam("vognnummer") int vognnummer)
+    {
         bilService.deleteBil(vognnummer);
-        return "redirect:/bil"; // Redirect to the fleet page after deletion
+
+        return "redirect:/bil";
     }
+
+
+    /* Denne metode kunne bruges, hvis vi vil have en/flere separate html til de enkelte biler
+    @GetMapping("/{vognnummer}")
+    public Bil getBilById(@PathVariable("vognnummer") int vognnummer)
+    {
+        return bilService.getBilById(vognnummer);
+    }*/
+
 }

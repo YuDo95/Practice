@@ -8,10 +8,10 @@ public class User {
     private int user_telefonnummer; // Corresponds to user_telefonnummer in SQL
     private String user_rolle; // Corresponds to user_rolle in SQL
 
-    // Default Constructor
+
     public User() {}
 
-    // Constructor for creating a new user
+
     public User(String user_navn, String user_email, String user_password, int user_telefonnummer, String user_rolle) {
         this.user_navn = user_navn;
         this.user_email = user_email;
@@ -20,7 +20,7 @@ public class User {
         this.user_rolle = user_rolle;
     }
 
-    // Full Constructor
+
     public User(int user_id, String user_navn, String user_email, String user_password, int user_telefonnummer, String user_rolle) {
         this.user_id = user_id;
         this.user_navn = user_navn;
@@ -78,4 +78,18 @@ public class User {
     public void setUser_rolle(String user_rolle) {
         this.user_rolle = user_rolle;
     }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_email='" + user_email + '\'' +
+                ", user_id=" + user_id +
+                ", user_navn='" + user_navn + '\'' +
+                ", user_password='" + user_password + '\'' +
+                ", user_telefonnummer=" + user_telefonnummer +
+                ", user_rolle='" + user_rolle + '\'' +
+                '}';
+    }
+
 }

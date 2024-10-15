@@ -13,37 +13,38 @@ public class BilService {
     private final BilRepository bilRepository;
 
     @Autowired
-    public BilService(BilRepository bilRepository) {
+    public BilService(BilRepository bilRepository)
+    {
         this.bilRepository = bilRepository;
     }
 
-    public Bil getBilById(int vognnummer) {
+
+    public List<Bil> getAllBiler() {return bilRepository.findAll();}
+
+
+    public void createBil(Bil bil) {bilRepository.create(bil);}
+
+
+    public void updateBil(Bil bil)
+    {
+        bilRepository.update(bil);
+    }
+
+
+    public void deleteBil(int vognnummer)
+    {
+        bilRepository.delete(vognnummer);
+    }
+
+
+     /* Denne metode kunne bruges, hvis vi vil have en/flere separate html til de enkelte biler
+    public Bil getBilById(int vognnummer)
+    {
         Bil bil = bilRepository.findById(vognnummer);
         if (bil == null) {
             throw new IllegalArgumentException("Bil not found with vognnummer: " + vognnummer);
         }
         return bil;
-    }
+    } */
 
-    public List<Bil> getAllBiler() {
-        return bilRepository.findAll();
-    }
-
-    public void saveBil(Bil bil) {
-        bilRepository.save(bil);
-    }
-
-    public void updateBil(Bil bil) {
-        if (bilRepository.findById(bil.getVognnummer()) == null) {
-            throw new IllegalArgumentException("Cannot update. Bil not found with vognnummer: " + bil.getVognnummer());
-        }
-        bilRepository.update(bil);
-    }
-
-    public void deleteBil(int vognnummer) {
-        if (bilRepository.findById(vognnummer) == null) {
-            throw new IllegalArgumentException("Cannot delete. Bil not found with vognnummer: " + vognnummer);
-        }
-        bilRepository.delete(vognnummer);
-    }
 }

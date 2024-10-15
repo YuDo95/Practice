@@ -3,25 +3,24 @@ package dk.kea.practice.Model;
 import java.time.LocalDate;
 
 public class Lejeaftale {
-    private int lejeaftaleId;         // Primary key
-    private int bilVognnummer;         // Foreign key reference to Bil
-    private int userId;                // Foreign key reference to User
-    private LocalDate startdato;          // Start date of the rental in String format (e.g., "YYYY-MM-DD")
-    private LocalDate slutdato;           // End date of the rental in String format (e.g., "YYYY-MM-DD")
-    private double pris;               // Rental price
-    private int aftaltKm;              // Agreed kilometers
-    private Integer slutKm;            // Ending kilometers
-    private boolean overkoerteKm;      // Flag for exceeded kilometers
-    private LocalDate createdAt;           // Record creation timestamp in String format
-    private LocalDate updatedAt;           // Record update timestamp in String format
+    private int lejeaftaleId;
+    private int bilVognnummer;
+    private int userId;
+    private LocalDate startdato;
+    private LocalDate slutdato;
+    private double pris;
+    private int aftaltKm;
+    private Integer slutKm;
+    private boolean overkoerteKm;
+    private LocalDate createdAt;
+    private LocalDate updatedAt;
 
-    // Default constructor
-    public Lejeaftale() {
-    }
 
-    // Parameterized constructor for form inputs
-    public Lejeaftale(int bilVognnummer, int userId, LocalDate startdato, LocalDate slutdato, double pris,
-                      int aftaltKm) {
+    public Lejeaftale() {}
+
+
+    public Lejeaftale(int bilVognnummer, int userId, LocalDate startdato, LocalDate slutdato, double pris, int aftaltKm)
+    {
         this.bilVognnummer = bilVognnummer;
         this.userId = userId;
         this.startdato = startdato;
@@ -31,6 +30,7 @@ public class Lejeaftale {
         this.slutKm = null;           // Default to null for optional field
         this.overkoerteKm = false;    // Default to false for boolean field
     }
+
 
     // Getters and setters
     public int getLejeaftaleId() {
@@ -120,4 +120,23 @@ public class Lejeaftale {
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+
+    @Override
+    public String toString() {
+        return "Lejeaftale{" +
+                "aftaltKm=" + aftaltKm +
+                ", lejeaftaleId=" + lejeaftaleId +
+                ", bilVognnummer=" + bilVognnummer +
+                ", userId=" + userId +
+                ", startdato=" + startdato +
+                ", slutdato=" + slutdato +
+                ", pris=" + pris +
+                ", slutKm=" + slutKm +
+                ", overkoerteKm=" + overkoerteKm +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
 }

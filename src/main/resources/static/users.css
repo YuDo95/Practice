@@ -154,8 +154,7 @@ select:focus {
     }
 }
 
-.header-button-container,
-.footer-button-container{
+.header-button-container{
     display: flex; /* Arrange header buttons in a row */
     justify-content: center; /* Center the buttons */
     gap: 15px; /* Space between header buttons */

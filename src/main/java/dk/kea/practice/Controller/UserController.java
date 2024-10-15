@@ -16,37 +16,46 @@ public class UserController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService)
+    {
         this.userService = userService;
     }
 
+
     @GetMapping
-    public String manageUsers(Model model) {
+    public String manageUsers(Model model)
+    {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        model.addAttribute("newUser", new User());
+
         return "users";
     }
 
+
     @PostMapping("/create")
-    public String createUser(@ModelAttribute User user) {
+    public String createUser(@ModelAttribute User user)
+    {
         userService.createUser(user);
+
         return "redirect:/users";
     }
+
 
     @PostMapping("/update")
-    public String updateUser(@RequestParam int user_id, @RequestParam String user_navn,
-                             @RequestParam String user_email, @RequestParam String user_password,
-                             @RequestParam int user_telefonnummer, @RequestParam String user_rolle) {
-
-        User user = new User(user_id, user_navn, user_email, user_password, user_telefonnummer, user_rolle);
+    public String updateUser(@ModelAttribute User user)
+    {
         userService.updateUser(user);
+
         return "redirect:/users";
     }
+
 
     @PostMapping("/delete")
-    public String deleteUser(@RequestParam("selectedUserId") int userId) {
+    public String deleteUser(@RequestParam("selectedUserId") int userId)
+    {
         userService.deleteUser(userId);
+
         return "redirect:/users";
     }
+
 }

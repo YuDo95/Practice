@@ -19,6 +19,7 @@ public class Bil {
     public Bil() {
     }
 
+
     public Bil(int aargang, double co2Udledning, String farve, int km, String maerke, String model, double regAfgift, String registreringsdato, double staalpris, String stelnummer, String udleveringslokation, int vognnummer) {
         this.aargang = aargang;
         this.co2Udledning = co2Udledning;
@@ -33,6 +34,7 @@ public class Bil {
         this.udleveringslokation = udleveringslokation;
         this.vognnummer = vognnummer;
     }
+
 
     public int getVognnummer() {
         return vognnummer;
@@ -129,6 +131,7 @@ public class Bil {
     public void setKm(int km) {
         this.km = km;
     }
+
 
     @Override
     public String toString() {
