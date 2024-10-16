@@ -35,27 +35,62 @@ public class BilRepositoryImpl implements BilRepository {
     @Override
     public void create(Bil bil)
     {
-        String sql = "INSERT INTO bil (bil_stelnummer, bil_maerke, bil_model, bil_aargang, bil_farve, " +
-                "bil_registreringsdato, bil_udleveringslokation, bil_staalpris, bil_regAfgift, " +
-                "bil_co2Udledning, bil_km) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bil " +
+                "(bil_stelnummer, " +
+                "bil_maerke, " +
+                "bil_model," +
+                "bil_aargang, " +
+                "bil_farve, " +
+                "bil_registreringsdato, " +
+                "bil_udleveringslokation," +
+                "bil_staalpris, bil_regAfgift, " +
+                "bil_co2Udledning, bil_km) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        jdbcTemplate.update(sql, bil.getStelnummer(), bil.getMaerke(), bil.getModel(), bil.getAargang(),
-                bil.getFarve(), bil.getRegistreringsdato(), bil.getUdleveringslokation(),
-                bil.getStaalpris(), bil.getRegAfgift(), bil.getCo2Udledning(), bil.getKm());
+        jdbcTemplate.update(sql,
+                bil.getStelnummer(),
+                bil.getMaerke(),
+                bil.getModel(),
+                bil.getAargang(),
+                bil.getFarve(),
+                bil.getRegistreringsdato(),
+                bil.getUdleveringslokation(),
+                bil.getStaalpris(),
+                bil.getRegAfgift(),
+                bil.getCo2Udledning(),
+                bil.getKm());
     }
 
 
     @Override
     public void update(Bil bil)
     {
-        String sql = "UPDATE bil SET bil_stelnummer = ?, bil_maerke = ?, bil_model = ?, bil_aargang = ?, " +
-                "bil_farve = ?, bil_registreringsdato = ?, bil_udleveringslokation = ?, " +
-                "bil_staalpris = ?, bil_regAfgift = ?, bil_co2Udledning = ?, bil_km = ? " +
+        String sql = "UPDATE bil SET " +
+                "bil_stelnummer = ?," +
+                " bil_maerke = ?, " +
+                "bil_model = ?, " +
+                "bil_aargang = ?, " +
+                "bil_farve = ?, " +
+                "bil_registreringsdato = ?," +
+                "bil_udleveringslokation = ?, " +
+                "bil_staalpris = ?," +
+                "bil_regAfgift = ?, " +
+                "bil_co2Udledning = ?," +
+                " bil_km = ? " +
                 "WHERE bil_vognnummer = ?";
 
-        jdbcTemplate.update(sql, bil.getStelnummer(), bil.getMaerke(), bil.getModel(), bil.getAargang(),
-                bil.getFarve(), bil.getRegistreringsdato(), bil.getUdleveringslokation(),
-                bil.getStaalpris(), bil.getRegAfgift(), bil.getCo2Udledning(), bil.getKm(),
+        jdbcTemplate.update(sql,
+                bil.getStelnummer(),
+                bil.getMaerke(),
+                bil.getModel(),
+                bil.getAargang(),
+                bil.getFarve(),
+                bil.getRegistreringsdato(),
+                bil.getUdleveringslokation(),
+                bil.getStaalpris(),
+                bil.getRegAfgift(),
+                bil.getCo2Udledning(),
+                bil.getKm(),
                 bil.getVognnummer());
     }
 

@@ -26,6 +26,7 @@ public class BilController {
     public String getAllBiler(Model model)
     {
         List<Bil> biler = bilService.getAllBiler();
+
         model.addAttribute("biler", biler);
 
         return "bil";

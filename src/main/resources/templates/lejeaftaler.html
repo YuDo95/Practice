@@ -74,7 +74,7 @@
 
 <h2>Opret Lejeaftale</h2>
 <form th:action="@{/lejeaftaler/create}" method="post">
-    <select name="vognnummer" id="vognnummer" required>
+    <select name="vognnummer" required>
         <option value="" disabled selected>Vælg bil</option>
         <option th:each="bil : ${biler}" th:value="${bil.vognnummer}" th:text="${bil.model}"></option>
     </select>
@@ -90,8 +90,11 @@
     <input type="date" name="slutdato" placeholder="Slutdato" required>
     <input type="number" name="pris" placeholder="Lejeaftale Pris (DKK)" required step="0.01" min="0">
     <input type="number" name="aftaltKm" placeholder="Aftalt KM" required min="0">
+
     <button type="submit" class="opret-lejeaftale-knap">Opret Lejeaftale</button>
 </form>
+
+
 
 
 <!-- Optional error message for unsuccessful operations -->

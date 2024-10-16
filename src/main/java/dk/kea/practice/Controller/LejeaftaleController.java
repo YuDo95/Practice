@@ -48,19 +48,29 @@ public class LejeaftaleController {
 
 
     @PostMapping("/create")
-    public String createLejeaftale(@RequestParam("vognnummer") int vognnummer, @RequestParam("users") int userId, @RequestParam("startdato") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startdato, @RequestParam("slutdato") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate slutdato, @RequestParam("pris") double pris, @RequestParam("aftaltKm") int aftaltKm)
+    public String createLejeaftale(@ModelAttribute Lejeaftale lejeaftale,
+                                   @RequestParam("vognnummer") int vognnummer,
+                                   @RequestParam("users") int userId)
     {
-        Lejeaftale lejeaftale = new Lejeaftale();
         lejeaftale.setBilVognnummer(vognnummer);
         lejeaftale.setUserId(userId);
-        lejeaftale.setStartdato(startdato);
-        lejeaftale.setSlutdato(slutdato);
-        lejeaftale.setPris(pris);
-        lejeaftale.setAftaltKm(aftaltKm);
         lejeaftale.setSlutKm(null);
         lejeaftale.setOverkoerteKm(false);
 
+        // Save the lejeaftale using the service
         lejeaftaleService.createLejeaftale(lejeaftale);
+
+        return "redirect:/lejeaftaler";
+    }
+
+
+    @PostMapping("/update/{id}")
+    public String updateLejeaftale(@PathVariable("id") int lejeaftaleId,
+                                   @ModelAttribute Lejeaftale lejeaftale) {
+
+        lejeaftale.setLejeaftaleId(lejeaftaleId);
+
+        lejeaftaleService.updateLejeaftale(lejeaftale);
 
         return "redirect:/lejeaftaler";
     }
@@ -70,18 +80,6 @@ public class LejeaftaleController {
     public String deleteLejeaftale(@RequestParam("id") int lejeaftale_id)
     {
         lejeaftaleService.deleteLejeaftale(lejeaftale_id);
-        return "redirect:/lejeaftaler";
-    }
-
-
-    @PostMapping("/update/{id}")
-    public String updateLejeaftale(@PathVariable("id") int lejeaftaleId, @RequestParam("startdato") String startdato, @RequestParam("slutdato") String slutdato, @RequestParam("pris") double pris, @RequestParam("aftaltKm") int aftaltKm, @RequestParam("slutKm") Integer slutKm, @RequestParam("overkoerteKm") boolean overkoerteKm)
-    {
-        if (aftaltKm < 0) {
-            return "redirect:/lejeaftaler?error=Aftalt KM must be a positive integer";
-        }
-
-        lejeaftaleService.updateLejeaftale(lejeaftaleId, startdato, slutdato, pris, aftaltKm, slutKm, overkoerteKm);
 
         return "redirect:/lejeaftaler";
     }

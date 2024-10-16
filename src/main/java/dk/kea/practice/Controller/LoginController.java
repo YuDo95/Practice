@@ -30,7 +30,8 @@ public class LoginController {
 
 
     @PostMapping()
-    public String login(@RequestParam String user_email, @RequestParam String user_password, Model model) {
+    public String login(@RequestParam String user_email,
+                        @RequestParam String user_password, Model model) {
         try {
             if (userService.login(user_email, user_password)) {
                 return "redirect:/home";
