@@ -1,18 +1,19 @@
 package dk.kea.practice.Model;
 
 public class User {
-    private int user_id; // Corresponds to user_id in SQL
-    private String user_navn; // Corresponds to user_navn in SQL
-    private String user_email; // Corresponds to user_email in SQL
-    private String user_password; // Corresponds to user_password in SQL
-    private int user_telefonnummer; // Corresponds to user_telefonnummer in SQL
-    private String user_rolle; // Corresponds to user_rolle in SQL
+    private int user_id;
+    private String user_navn;
+    private String user_email;
+    private String user_password;
+    private int user_telefonnummer;
+    private String user_rolle;
 
 
     public User() {}
 
 
-    public User(String user_navn, String user_email, String user_password, int user_telefonnummer, String user_rolle) {
+    public User(String user_navn, String user_email, String user_password, int user_telefonnummer, String user_rolle)
+    {
         this.user_navn = user_navn;
         this.user_email = user_email;
         this.user_password = user_password;
@@ -21,7 +22,8 @@ public class User {
     }
 
 
-    public User(int user_id, String user_navn, String user_email, String user_password, int user_telefonnummer, String user_rolle) {
+    public User(int user_id, String user_navn, String user_email, String user_password, int user_telefonnummer, String user_rolle)
+    {
         this.user_id = user_id;
         this.user_navn = user_navn;
         this.user_email = user_email;
@@ -81,7 +83,8 @@ public class User {
 
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "User{" +
                 "user_email='" + user_email + '\'' +
                 ", user_id=" + user_id +

@@ -14,30 +14,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     private final UserService userService;
+
     @Autowired
-    public LoginController(UserService userService) {
+    public LoginController(UserService userService)
+    {
         this.userService = userService;
     }
 
+
     @GetMapping()
-    public String showLoginForm() {
+    public String showLoginForm()
+    {
         return "login";
     }
 
+
     @PostMapping()
-    public String login(@RequestParam String user_email,
-                        @RequestParam String user_password,
-                        Model model) {
+    public String login(@RequestParam String user_email, @RequestParam String user_password, Model model) {
         try {
             if (userService.login(user_email, user_password)) {
-                return "redirect:/home"; // Redirect to home page
+                return "redirect:/home";
             } else {
                 model.addAttribute("error", "Forkert email eller password.");
-                return "login"; // Return to login page
+                return "login";
             }
         } catch (Exception e) {
             model.addAttribute("error", "An unexpected error occurred: " + e.getMessage());
-            return "login"; // Return to login page
+            return "login";
         }
     }
 }

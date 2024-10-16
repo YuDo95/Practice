@@ -27,8 +27,8 @@ public class Lejeaftale {
         this.slutdato = slutdato;
         this.pris = pris;
         this.aftaltKm = aftaltKm;
-        this.slutKm = null;           // Default to null for optional field
-        this.overkoerteKm = false;    // Default to false for boolean field
+        this.slutKm = null;
+        this.overkoerteKm = false;
     }
 
 
@@ -123,7 +123,8 @@ public class Lejeaftale {
 
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Lejeaftale{" +
                 "aftaltKm=" + aftaltKm +
                 ", lejeaftaleId=" + lejeaftaleId +
