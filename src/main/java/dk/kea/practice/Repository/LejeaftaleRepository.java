@@ -62,14 +62,16 @@ public class LejeaftaleRepository {
         jdbcTemplate.update(sql, startdato, slutdato, pris, aftaltKm, slutKm, overkoerteKm, lejeaftaleId);
     }
 
-    // Method to delete a lejeaftale
-    public void deleteLejeaftale(int id) {
+
+    public void deleteLejeaftale(int id)
+    {
         String sql = "DELETE FROM lejeaftale WHERE lejeaftale_id = ?";
         jdbcTemplate.update(sql, id);
     }
 
-    // Helper method to map rows of the result set to Lejeaftale objects
-    private Lejeaftale mapRowToLejeaftale(ResultSet rs, int rowNum) throws SQLException {
+
+    private Lejeaftale mapRowToLejeaftale(ResultSet rs, int rowNum) throws SQLException
+    {
         Lejeaftale lejeaftale = new Lejeaftale();
         lejeaftale.setLejeaftaleId(rs.getInt("lejeaftale_id"));
         lejeaftale.setBilVognnummer(rs.getInt("lejeaftale_bil_vognnummer"));
@@ -77,7 +79,7 @@ public class LejeaftaleRepository {
         lejeaftale.setSlutdato(rs.getObject("lejeaftale_slutdato", LocalDate.class));
         lejeaftale.setPris(rs.getDouble("lejeaftale_pris"));
         lejeaftale.setAftaltKm(rs.getInt("lejeaftale_aftalt_km"));
-        lejeaftale.setSlutKm(rs.getObject("lejeaftale_slut_km", Integer.class)); // Handling possible null value
+        lejeaftale.setSlutKm(rs.getObject("lejeaftale_slut_km", Integer.class));
         lejeaftale.setOverkoerteKm(rs.getBoolean("lejeaftale_overkoerte_km"));
         lejeaftale.setCreatedAt(rs.getObject("lejeaftale_created_at", LocalDate.class));
         lejeaftale.setUpdatedAt(rs.getObject("lejeaftale_updated_at", LocalDate.class));

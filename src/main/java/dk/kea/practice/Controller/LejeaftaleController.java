@@ -24,7 +24,8 @@ public class LejeaftaleController {
     private final UserService userService;
 
     @Autowired
-    public LejeaftaleController(LejeaftaleService lejeaftaleService, BilService bilService,UserService userService) {
+    public LejeaftaleController(LejeaftaleService lejeaftaleService, BilService bilService,UserService userService)
+    {
         this.lejeaftaleService = lejeaftaleService;
         this.bilService = bilService;
         this.userService = userService;
@@ -32,29 +33,23 @@ public class LejeaftaleController {
 
 
     @GetMapping
-    public String getAllLejeaftaler(Model model) {
-
+    public String getAllLejeaftaler(Model model)
+    {
         List<Lejeaftale> lejeaftaler = lejeaftaleService.getAllLejeaftale();
         List<Bil> biler = bilService.getAllBiler();
         List<User> users = userService.getAllUsers();
 
         model.addAttribute("biler", biler);
         model.addAttribute("users", users);
-        model.addAttribute("lejeaftaler", lejeaftaler);// Add the list to the model
+        model.addAttribute("lejeaftaler", lejeaftaler);
 
         return "lejeaftaler";
     }
 
 
     @PostMapping("/create")
-    public String createLejeaftale(
-            @RequestParam("vognnummer") int vognnummer,
-            @RequestParam("users") int userId,
-            @RequestParam("startdato") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startdato,
-            @RequestParam("slutdato") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate slutdato,
-            @RequestParam("pris") double pris,  // Changed to double
-            @RequestParam("aftaltKm") int aftaltKm) {
-
+    public String createLejeaftale(@RequestParam("vognnummer") int vognnummer, @RequestParam("users") int userId, @RequestParam("startdato") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startdato, @RequestParam("slutdato") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate slutdato, @RequestParam("pris") double pris, @RequestParam("aftaltKm") int aftaltKm)
+    {
         Lejeaftale lejeaftale = new Lejeaftale();
         lejeaftale.setBilVognnummer(vognnummer);
         lejeaftale.setUserId(userId);
@@ -67,12 +62,13 @@ public class LejeaftaleController {
 
         lejeaftaleService.createLejeaftale(lejeaftale);
 
-        return "redirect:/lejeaftaler";  // Redirect back to list page
+        return "redirect:/lejeaftaler";
     }
 
 
     @PostMapping("/delete")
-    public String deleteLejeaftale(@RequestParam("id") int lejeaftale_id) {
+    public String deleteLejeaftale(@RequestParam("id") int lejeaftale_id)
+    {
         lejeaftaleService.deleteLejeaftale(lejeaftale_id);
         return "redirect:/lejeaftaler";
     }
