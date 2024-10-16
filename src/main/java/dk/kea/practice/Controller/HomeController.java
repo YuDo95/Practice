@@ -8,13 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/home")
 public class HomeController {
 
-    @GetMapping() // Maps GET requests to /home
-    public String showHomePage() {
-        return "home"; // Returns the home view (home.html)
+    @GetMapping()
+    public String showHomePage()
+    {
+        return "home";
     }
 
-    @GetMapping("/user_management")
-    public String redirectToUserManagement() {
-        return "redirect:/users"; // Directly return users.html
-    }
 }

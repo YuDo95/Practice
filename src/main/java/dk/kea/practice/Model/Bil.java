@@ -134,7 +134,8 @@ public class Bil {
 
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Bil{" +
                 "aargang=" + aargang +
                 ", vognnummer=" + vognnummer +
