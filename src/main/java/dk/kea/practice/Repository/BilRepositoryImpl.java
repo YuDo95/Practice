@@ -44,8 +44,9 @@ public class BilRepositoryImpl implements BilRepository {
                 "bil_registreringsdato, " +
                 "bil_udleveringslokation," +
                 "bil_staalpris, bil_regAfgift, " +
-                "bil_co2Udledning, bil_km) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "bil_co2Udledning, bil_km ," +
+                "bil.imageURL) " +
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(sql,
                 bil.getStelnummer(),
@@ -58,7 +59,9 @@ public class BilRepositoryImpl implements BilRepository {
                 bil.getStaalpris(),
                 bil.getRegAfgift(),
                 bil.getCo2Udledning(),
-                bil.getKm());
+                bil.getKm(),
+                bil.getImageUrl()
+        );
     }
 
 
@@ -77,6 +80,7 @@ public class BilRepositoryImpl implements BilRepository {
                 "bil_regAfgift = ?, " +
                 "bil_co2Udledning = ?," +
                 " bil_km = ? " +
+                "bil.imageURL = ? " +
                 "WHERE bil_vognnummer = ?";
 
         jdbcTemplate.update(sql,
@@ -91,7 +95,8 @@ public class BilRepositoryImpl implements BilRepository {
                 bil.getRegAfgift(),
                 bil.getCo2Udledning(),
                 bil.getKm(),
-                bil.getVognnummer());
+                bil.getVognnummer(),
+                bil.getImageUrl());
     }
 
 
@@ -122,6 +127,8 @@ public class BilRepositoryImpl implements BilRepository {
             bil.setRegAfgift(rs.getDouble("bil_regAfgift"));
             bil.setCo2Udledning(rs.getDouble("bil_co2Udledning"));
             bil.setKm(rs.getInt("bil_km"));
+            bil.setImageUrl(rs.getString("imageURL"));
+
             return bil;
         }
     }

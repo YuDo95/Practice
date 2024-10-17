@@ -54,9 +54,7 @@
 
                 <!-- Overkoerte KM checkbox -->
                 <label for="overkoerteKm">Overkørte KM?</label>
-                <input type="hidden" name="overkoerteKm" value="false"> <!-- Hidden field to ensure false is submitted -->
                 <input type="checkbox" id="overkoerteKm" name="overkoerteKm" value="true" th:checked="${lejeaftale.overkoerteKm}">
-
 
                 <button type="submit" class="opdater-lejeaftale-knap">Opdater</button>
             </form>
