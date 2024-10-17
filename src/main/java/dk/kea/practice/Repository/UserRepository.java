@@ -31,17 +31,40 @@ public class UserRepository {
 
     public void createUser(User user)
     {
-        String sql = "INSERT INTO user (user_navn, user_email, user_password, user_telefonnummer, user_rolle) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, user.getUser_navn(), user.getUser_email(), user.getUser_password(),
-                user.getUser_telefonnummer(), user.getUser_rolle());
+        String sql = "INSERT INTO user " +
+                "(user_navn, " +
+                "user_email," +
+                "user_password," +
+                "user_telefonnummer, " +
+                "user_rolle) " +
+                "VALUES (?, ?, ?, ?, ?)";
+
+        jdbcTemplate.update(sql,
+                user.getUser_navn(),
+                user.getUser_email(),
+                user.getUser_password(),
+                user.getUser_telefonnummer(),
+                user.getUser_rolle());
     }
 
 
     public void updateUser(User user)
     {
-        String sql = "UPDATE user SET user_navn = ?, user_email = ?, user_password = ?, user_telefonnummer = ?, user_rolle = ? WHERE user_id = ?";
-        jdbcTemplate.update(sql, user.getUser_navn(), user.getUser_email(), user.getUser_password(),
-                user.getUser_telefonnummer(), user.getUser_rolle(), user.getUser_id());
+        String sql = "UPDATE user SET " +
+                "user_navn = ?, " +
+                "user_email = ?, " +
+                "user_password = ?, " +
+                "user_telefonnummer = ?, " +
+                "user_rolle = ? " +
+                "WHERE user_id = ?";
+
+        jdbcTemplate.update(sql,
+                user.getUser_navn(),
+                user.getUser_email(),
+                user.getUser_password(),
+                user.getUser_telefonnummer(),
+                user.getUser_rolle(),
+                user.getUser_id());
     }
 
 
@@ -55,7 +78,9 @@ public class UserRepository {
     public boolean validateUser(String email, String password)
     {
         String sql = "SELECT COUNT(*) FROM user WHERE user_email = ? AND user_password = ?";
+
         Integer count = jdbcTemplate.queryForObject(sql, new Object[]{email, password}, Integer.class);
+
         return count != null && count > 0;
     }
 

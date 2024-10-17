@@ -22,45 +22,45 @@
 
 <!-- Car Table -->
 <h2>Bil Oversigt</h2>
-<table>
-    <tr>
-        <th>Vognnummer</th>
-        <th>Stelnummer</th>
-        <th>Model</th>
-        <th>Mærke</th>
-        <th>Årgang</th>
-        <th>Farve</th>
-        <th>Registreringsdato</th>
-        <th>Opdater Bil</th>
-    </tr>
-    <tr th:each="bil : ${biler}">
-        <td th:text="${bil.vognnummer}"></td>
-        <td th:text="${bil.stelnummer}"></td>
-        <td th:text="${bil.model}"></td>
-        <td th:text="${bil.maerke}"></td>
-        <td th:text="${bil.aargang}"></td>
-        <td th:text="${bil.farve}"></td>
-        <td th:text="${bil.registreringsdato}"></td>
-        <td>
-            <!-- Edit Car Form -->
-            <form th:action="@{/bil/update/{vognnummer}(vognnummer=${bil.vognnummer})}" method="post">
-                <input type="hidden" name="vognnummer" th:value="${bil.vognnummer}"/>
-                <input type="text" name="model" th:value="${bil.model}" required />
-                <input type="text" name="maerke" th:value="${bil.maerke}" required />
-                <input type="number" name="aargang" th:value="${bil.aargang}" required />
-                <input type="text" name="farve" th:value="${bil.farve}" required />
-                <input type="date" name="registreringsdato" th:value="${bil.registreringsdato}" required />
-                <input type="text" name="stelnummer" th:value="${bil.stelnummer}" required />
-                <input type="text" name="udleveringslokation" th:value="${bil.udleveringslokation}" required />
-                <input type="number" name="staalpris" th:value="${bil.staalpris}" required />
-                <input type="number" name="regAfgift" th:value="${bil.regAfgift}" required />
-                <input type="number" name="co2Udledning" th:value="${bil.co2Udledning}" required />
-                <input type="number" name="km" th:value="${bil.km}" required />
-                <button type="submit" class="opdater-bil-knap">Opdater bil</button>
-            </form>
-        </td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <th>Vognnummer</th>
+            <th>Stelnummer</th>
+            <th>Model</th>
+            <th>Mærke</th>
+            <th>Årgang</th>
+            <th>Farve</th>
+            <th>Registreringsdato</th>
+            <th>Billede</th> <!-- Add a header for the image -->
+            <th>Opdater Bil</th>
+        </tr>
+        <tr th:each="bil : ${biler}">
+            <td th:text="${bil.vognnummer}"></td>
+            <td colspan="7" style="text-align: center;"> <!-- Use colspan to span all columns except update -->
+                <img th:src="${bil.imageUrl}" alt="Bil imageURL" style="width: 1000px; height: auto;" />
+            </td>
+            <td>
+                <!-- Edit Car Form -->
+                <form th:action="@{/bil/update/{vognnummer}(vognnummer=${bil.vognnummer})}" method="post">
+                    <input type="hidden" name="vognnummer" th:value="${bil.vognnummer}"/>
+                    <input type="text" name="model" th:value="${bil.model}" required />
+                    <input type="text" name="maerke" th:value="${bil.maerke}" required />
+                    <input type="number" name="aargang" th:value="${bil.aargang}" required />
+                    <input type="text" name="farve" th:value="${bil.farve}" required />
+                    <input type="date" name="registreringsdato" th:value="${bil.registreringsdato}" required />
+                    <input type="text" name="stelnummer" th:value="${bil.stelnummer}" required />
+                    <input type="text" name="udleveringslokation" th:value="${bil.udleveringslokation}" required />
+                    <input type="number" name="staalpris" th:value="${bil.staalpris}" required />
+                    <input type="number" name="regAfgift" th:value="${bil.regAfgift}" required />
+                    <input type="number" name="co2Udledning" th:value="${bil.co2Udledning}" required />
+                    <input type="number" name="km" th:value="${bil.km}" required />
+                    <input type="text" name="imageUrl" th:value="${bil.imageUrl}" placeholder="Image URL" required />
+                    <button type="submit" class="opdater-bil-knap">Opdater bil</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
 
 <!-- Create New Car Form -->
 <h2>Opret Bil</h2>
@@ -76,6 +76,12 @@
     <input type="number" name="regAfgift" placeholder="Registreringsafgift" required>
     <input type="number" name="co2Udledning" placeholder="CO2 Udledning" required>
     <input type="number" name="km" placeholder="Kilometer" required>
+
+
+    <input type="text" name="imageUrl" placeholder="Image URL" required />
+
+
+
     <button type="submit" class="opret-bil-knap">Opret Bil</button>
 </form>
 

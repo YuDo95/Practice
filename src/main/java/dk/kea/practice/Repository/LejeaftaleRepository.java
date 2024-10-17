@@ -12,34 +12,13 @@ import java.util.List;
 
 @Repository
 public class LejeaftaleRepository {
+
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
     public LejeaftaleRepository(JdbcTemplate jdbcTemplate)
     {
         this.jdbcTemplate = jdbcTemplate;
-    }
-
-
-    public void createLejeaftale(Lejeaftale lejeaftale)
-    {
-        String sql = "INSERT INTO lejeaftale (lejeaftale_bil_vognnummer, lejeaftale_user_id, lejeaftale_startdato, lejeaftale_slutdato, lejeaftale_pris, lejeaftale_aftalt_km, lejeaftale_created_at, lejeaftale_updated_at) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
-
-        jdbcTemplate.update(sql,
-                lejeaftale.getBilVognnummer(),
-                lejeaftale.getUserId(),
-                lejeaftale.getStartdato(),
-                lejeaftale.getSlutdato(),
-                lejeaftale.getPris(),
-                lejeaftale.getAftaltKm());
-    }
-
-
-    public Lejeaftale getLejeaftaleById(int id)
-    {
-        String sql = "SELECT * FROM lejeaftale WHERE lejeaftale_id = ?";
-
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, this::mapRowToLejeaftale);
     }
 
 
@@ -51,15 +30,48 @@ public class LejeaftaleRepository {
     }
 
 
-    public void updateLejeaftale(int lejeaftaleId, String startdato, String slutdato, double pris, int aftaltKm, Integer slutKm, boolean overkoerteKm)
+    public void createLejeaftale(Lejeaftale lejeaftale)
     {
+        String sql = "INSERT INTO lejeaftale " +
+                "(lejeaftale_bil_vognnummer, " +
+                "lejeaftale_user_id, " +
+                "lejeaftale_startdato, " +
+                "lejeaftale_slutdato, " +
+                "lejeaftale_pris, " +
+                "lejeaftale_aftalt_km, " +
+                "lejeaftale_created_at," +
+                " lejeaftale_updated_at) " +
+                "VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
+
+        jdbcTemplate.update(sql,
+                lejeaftale.getBilVognnummer(),
+                lejeaftale.getUserId(),
+                lejeaftale.getStartdato(),
+                lejeaftale.getSlutdato(),
+                lejeaftale.getPris(),
+                lejeaftale.getAftaltKm());
+    }
+
+
+    public void updateLejeaftale(Lejeaftale lejeaftale) {
         String sql = "UPDATE lejeaftale SET " +
                 "lejeaftale_startdato = ?, " +
-                "lejeaftale_slutdato = ?, lejeaftale_pris = ?, lejeaftale_aftalt_km = ?, " +
-                "lejeaftale_slut_km = ?, lejeaftale_overkoerte_km = ?, lejeaftale_updated_at = CURRENT_TIMESTAMP " +
+                "lejeaftale_slutdato = ?, " +
+                "lejeaftale_pris = ?, " +
+                "lejeaftale_aftalt_km = ?, " +
+                "lejeaftale_slut_km = ?, " +
+                "lejeaftale_overkoerte_km = ?, " +
+                "lejeaftale_updated_at = CURRENT_TIMESTAMP " +
                 "WHERE lejeaftale_id = ?";
 
-        jdbcTemplate.update(sql, startdato, slutdato, pris, aftaltKm, slutKm, overkoerteKm, lejeaftaleId);
+        jdbcTemplate.update(sql,
+                lejeaftale.getStartdato(),
+                lejeaftale.getSlutdato(),
+                lejeaftale.getPris(),
+                lejeaftale.getAftaltKm(),
+                lejeaftale.getSlutKm(),
+                lejeaftale.isOverkoerteKm(),
+                lejeaftale.getLejeaftaleId());
     }
 
 
@@ -75,6 +87,7 @@ public class LejeaftaleRepository {
         Lejeaftale lejeaftale = new Lejeaftale();
         lejeaftale.setLejeaftaleId(rs.getInt("lejeaftale_id"));
         lejeaftale.setBilVognnummer(rs.getInt("lejeaftale_bil_vognnummer"));
+        lejeaftale.setUserId(rs.getInt("lejeaftale_user_id"));
         lejeaftale.setStartdato(rs.getObject("lejeaftale_startdato", LocalDate.class));
         lejeaftale.setSlutdato(rs.getObject("lejeaftale_slutdato", LocalDate.class));
         lejeaftale.setPris(rs.getDouble("lejeaftale_pris"));
@@ -86,5 +99,14 @@ public class LejeaftaleRepository {
 
         return lejeaftale;
     }
+
+
+    /* Bliver ikke brugt (endnu)
+    public Lejeaftale getLejeaftaleById(int id)
+    {
+        String sql = "SELECT * FROM lejeaftale WHERE lejeaftale_id = ?";
+
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, this::mapRowToLejeaftale);
+    }*/
 
 }

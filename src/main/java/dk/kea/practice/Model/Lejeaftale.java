@@ -33,93 +33,49 @@ public class Lejeaftale {
 
 
     // Getters and setters
-    public int getLejeaftaleId() {
-        return lejeaftaleId;
-    }
+    public int getLejeaftaleId() {return lejeaftaleId;}
 
-    public void setLejeaftaleId(int lejeaftaleId) {
-        this.lejeaftaleId = lejeaftaleId;
-    }
+    public void setLejeaftaleId(int lejeaftaleId) {this.lejeaftaleId = lejeaftaleId;}
 
-    public int getBilVognnummer() {
-        return bilVognnummer;
-    }
+    public int getBilVognnummer() {return bilVognnummer;}
 
-    public void setBilVognnummer(int bilVognnummer) {
-        this.bilVognnummer = bilVognnummer;
-    }
+    public void setBilVognnummer(int bilVognnummer) {this.bilVognnummer = bilVognnummer;}
 
-    public int getUserId() {
-        return userId;
-    }
+    public int getUserId() {return userId;}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+    public void setUserId(int userId) {this.userId = userId;}
 
-    public LocalDate getStartdato() {
-        return startdato;
-    }
+    public LocalDate getStartdato() {return startdato;}
 
-    public void setStartdato(LocalDate startdato) {
-        this.startdato = startdato;
-    }
+    public void setStartdato(LocalDate startdato) {this.startdato = startdato;}
 
-    public LocalDate getSlutdato() {
-        return slutdato;
-    }
+    public LocalDate getSlutdato() {return slutdato;}
 
-    public void setSlutdato(LocalDate slutdato) {
-        this.slutdato = slutdato;
-    }
+    public void setSlutdato(LocalDate slutdato) {this.slutdato = slutdato;}
 
-    public double getPris() {
-        return pris;
-    }
+    public double getPris() {return pris;}
 
-    public void setPris(double pris) {
-        this.pris = pris;
-    }
+    public void setPris(double pris) {this.pris = pris;}
 
-    public int getAftaltKm() {
-        return aftaltKm;
-    }
+    public int getAftaltKm() {return aftaltKm;}
 
-    public void setAftaltKm(int aftaltKm) {
-        this.aftaltKm = aftaltKm;
-    }
+    public void setAftaltKm(int aftaltKm) {this.aftaltKm = aftaltKm;}
 
-    public Integer getSlutKm() {
-        return slutKm;
-    }
+    public Integer getSlutKm() {return slutKm;}
 
-    public void setSlutKm(Integer slutKm) {
-        this.slutKm = slutKm;
-    }
+    public void setSlutKm(Integer slutKm) {this.slutKm = slutKm;}
 
-    public boolean isOverkoerteKm() {
-        return overkoerteKm;
-    }
+    public boolean isOverkoerteKm() {return overkoerteKm;}
 
-    public void setOverkoerteKm(boolean overkoerteKm) {
-        this.overkoerteKm = overkoerteKm;
-    }
+    public void setOverkoerteKm(boolean overkoerteKm) {this.overkoerteKm = overkoerteKm;}
 
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
+    public LocalDate getCreatedAt() {return createdAt;}
 
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
+    public void setCreatedAt(LocalDate createdAt) {this.createdAt = createdAt;}
 
-    public LocalDate getUpdatedAt() {
-        return updatedAt;
-    }
+    public LocalDate getUpdatedAt() {return updatedAt;}
 
-    public void setUpdatedAt(LocalDate updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+    public void setUpdatedAt(LocalDate updatedAt) {this.updatedAt = updatedAt;}
 
 
     @Override

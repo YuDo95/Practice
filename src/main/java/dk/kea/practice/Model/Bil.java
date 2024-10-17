@@ -14,13 +14,14 @@ public class Bil {
     private double regAfgift;
     private double co2Udledning;
     private int km;
+    private String imageUrl;
 
 
     public Bil() {
     }
 
 
-    public Bil(int aargang, double co2Udledning, String farve, int km, String maerke, String model, double regAfgift, String registreringsdato, double staalpris, String stelnummer, String udleveringslokation, int vognnummer) {
+    public Bil(int aargang, double co2Udledning, String farve, int km, String maerke, String model, double regAfgift, String registreringsdato, double staalpris, String stelnummer, String udleveringslokation, int vognnummer, String imageUrl) {
         this.aargang = aargang;
         this.co2Udledning = co2Udledning;
         this.farve = farve;
@@ -33,6 +34,7 @@ public class Bil {
         this.stelnummer = stelnummer;
         this.udleveringslokation = udleveringslokation;
         this.vognnummer = vognnummer;
+        this.imageUrl = imageUrl;
     }
 
 
@@ -132,23 +134,8 @@ public class Bil {
         this.km = km;
     }
 
+    public String getImageUrl() {return imageUrl;}
 
-    @Override
-    public String toString()
-    {
-        return "Bil{" +
-                "aargang=" + aargang +
-                ", vognnummer=" + vognnummer +
-                ", stelnummer='" + stelnummer + '\'' +
-                ", maerke='" + maerke + '\'' +
-                ", model='" + model + '\'' +
-                ", farve='" + farve + '\'' +
-                ", registreringsdato='" + registreringsdato + '\'' +
-                ", udleveringslokation='" + udleveringslokation + '\'' +
-                ", staalpris=" + staalpris +
-                ", regAfgift=" + regAfgift +
-                ", co2Udledning=" + co2Udledning +
-                ", km=" + km +
-                '}';
-    }
+    public void setImageUrl(String imageUrl) {this.imageUrl = imageUrl;}
+
 }
